@@ -1,19 +1,30 @@
 import { CSSProperties } from "react";
 
-type Style = {
-  backgroundColor: "red" | "blue" | "orange" | "green";
-  width: string;
-  height: string;
-};
+type BoxBack = { background: "Primary" | "Hover" | "Deactive" };
+type BoxBorder = { borderRadius: "Hard" | "Smooth" | "Circle" };
 
-const Box = (propt: Style) => {
-  const CssStyle: CSSProperties = {
-    width: propt.width,
-    height: propt.height,
-    backgroundColor: propt.backgroundColor,
+type BoxCSS = BoxBack & BoxBorder;
+const Box = (props: BoxCSS) => {
+  const BoxBackground = {
+    Primary: "red",
+    Hover: "blue",
+    Deactive: "yellow",
   };
 
-  return <div style={CssStyle}>{propt.backgroundColor}</div>;
+  const BoxBorderRadius = {
+    Hard: "0px",
+    Smooth: "6px",
+    Circle: "24px",
+  };
+
+  const BoxStyle: CSSProperties = {
+    backgroundColor: BoxBackground[props.background],
+    borderRadius: BoxBorderRadius[props.borderRadius],
+    padding: "20px 10px",
+    border: "none",
+    margin: "10px",
+  };
+  return <button style={BoxStyle}>Button</button>;
 };
 
 export default Box;
